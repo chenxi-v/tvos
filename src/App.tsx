@@ -161,7 +161,7 @@ function App() {
   }, [videoAPIs, home?.defaultDataSourceId])
 
   // 根据分类名称智能识别父分类
-  const getCategoryParentByName = (categoryName: string, mainCategories: Category[]): number => {
+  const getCategoryParentByName = (categoryName: string, mainCategories: Category[]): number | string => {
     const name = categoryName.toLowerCase()
 
     // 定义子分类到主分类的映射规则（支持多个父分类名称匹配）
@@ -189,7 +189,7 @@ function App() {
     }
 
     // 默认返回第一个主分类
-    return mainCategories[0]?.type_id || 0
+    return mainCategories[0]?.type_id ?? 0
   }
 
   const fetchCategories = async () => {
@@ -314,7 +314,7 @@ function App() {
                 const hasTypePid = data.class.some((cat: Category) => cat.type_pid !== undefined)
 
                 if (hasTypePid) {
-                  const filteredCategories = data.class.filter((cat: Category) => !blockedCategories.includes(cat.type_id))
+                  const filteredCategories = data.class.filter((cat: Category) => !blockedCategories.includes(Number(cat.type_id)))
                   setAllCategories(filteredCategories)
                   const mainCategories = filteredCategories.filter((cat: Category) => cat.type_pid === 0)
                   setCategories(mainCategories)
@@ -360,7 +360,7 @@ function App() {
                     }
                   }
                 } else {
-                  const filteredClass = data.class.filter((cat: Category) => !blockedCategories.includes(cat.type_id))
+                  const filteredClass = data.class.filter((cat: Category) => !blockedCategories.includes(Number(cat.type_id)))
 
                   const exactMainCategoryNames = ['电影', '电影片', '连续剧', '电视剧', '综艺', '综艺片', '动漫', '动漫片', '纪录片', '记录片', '短剧']
                   const subCategoryKeywords = ['解说', '新闻', '动态', '爆料', '资讯']
@@ -374,7 +374,7 @@ function App() {
 
                   const mainCategories = detectedMainCategories.length > 0
                     ? detectedMainCategories
-                    : filteredClass.filter((cat: Category) => [1, 2, 3, 4].includes(cat.type_id))
+                    : filteredClass.filter((cat: Category) => [1, 2, 3, 4].includes(Number(cat.type_id)))
 
                   const mainCategoryIds = mainCategories.map((cat: Category) => cat.type_id)
 
