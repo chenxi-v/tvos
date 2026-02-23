@@ -1,0 +1,603 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@plugin './hero.ts';
+@source '../../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /*shadcn ui variables*/
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+/*shadcn ui dark variables*/
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.145 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.145 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.985 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --border: oklch(0.269 0 0);
+  --input: oklch(0.269 0 0);
+  --ring: oklch(0.439 0 0);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(0.269 0 0);
+  --sidebar-ring: oklch(0.439 0 0);
+}
+
+/*shadcn ui inline variables*/
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+/*shadcn ui base layer*/
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    background-image: url('@/assets/bg.svg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+}
+
+@media (max-width: 767px) {
+  body {
+    background-position: top left;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+  .vertical-text {
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+  }
+}
+
+@layer base {
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+/* ============================================
+   ArtPlayer 底部控制栏样式优化
+   ============================================ */
+
+/* 播放器容器 - 确保控制栏基于容器宽度 */
+.art-video-player {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* 视频元素 - 保持比例但限制在容器内 */
+.art-video-player video {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+}
+
+/* 底部控制栏容器 - 基于播放器容器宽度 */
+.art-video-player .art-bottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.4) 60%, transparent);
+  padding: 20px 12px 12px;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* 进度条区域 - 基于容器宽度 */
+.art-video-player .art-progress {
+  position: relative;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 6px;
+  transition: height 0.2s ease;
+  cursor: pointer;
+  margin-bottom: 8px;
+  box-sizing: border-box !important;
+}
+
+/* 鼠标悬停时进度条变高 */
+.art-video-player.art-hover .art-progress,
+.art-video-player.art-control-show .art-progress {
+  height: 8px;
+}
+
+/* 进度条内部 - 绿色渐变 */
+.art-video-player .art-progress .art-progress-inner,
+.art-video-player .art-progress-inner {
+  background: linear-gradient(90deg, #22c55e, #4ade80) !important;
+  border-radius: 4px;
+}
+
+/* 进度条拖动点 - 绿色发光 */
+.art-video-player .art-progress .art-progress-dot,
+.art-video-player .art-progress-dot {
+  width: 16px;
+  height: 16px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.5) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* 鼠标悬停时拖动点放大 - 绿色发光增强 */
+.art-video-player.art-hover .art-progress .art-progress-dot,
+.art-video-player.art-control-show .art-progress .art-progress-dot,
+.art-video-player.art-hover .art-progress-dot,
+.art-video-player.art-control-show .art-progress-dot {
+  transform: scale(1.2);
+  box-shadow: 0 0 15px rgba(34, 197, 94, 0.8) !important;
+}
+
+/* 控制按钮区域 - 基于容器宽度 */
+.art-video-player .art-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 4px 0;
+  box-sizing: border-box !important;
+}
+
+/* 左右控制区域 */
+.art-video-player .art-controls-left,
+.art-video-player .art-controls-right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* 控制按钮 */
+.art-video-player .art-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 36px;
+  padding: 0 8px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.art-video-player .art-control:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
+}
+
+/* 控制按钮图标 */
+.art-video-player .art-control .art-icon {
+  font-size: 20px;
+  color: #fff;
+  transition: color 0.2s ease;
+}
+
+.art-video-player .art-control:hover .art-icon,
+.art-video-player .art-control:hover .art-icon svg,
+.art-video-player .art-control:hover svg {
+  color: #22c55e !important;
+  fill: #22c55e !important;
+}
+
+/* 时间显示 */
+.art-video-player .art-control-time {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  padding: 0 8px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.5px;
+}
+
+/* 音量控制面板 */
+.art-video-player .art-volume-panel {
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  padding: 8px;
+}
+
+/* 设置面板 */
+.art-video-player .art-settings {
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 移动端优化 */
+@media (max-width: 768px) {
+  .art-video-player .art-bottom {
+    padding: 12px 6px 8px;
+  }
+
+  .art-video-player .art-progress {
+    height: 6px;
+    margin-bottom: 4px;
+  }
+
+  .art-video-player .art-controls {
+    padding: 2px 0;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .art-video-player .art-controls::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* 左右控制区域 - 移动端自适应 */
+  .art-video-player .art-controls-left,
+  .art-video-player .art-controls-right {
+    gap: 2px;
+    flex-shrink: 0;
+  }
+
+  .art-video-player .art-controls-left {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .art-video-player .art-controls-right {
+    flex: 0 0 auto;
+  }
+
+  /* 控制按钮 - 移动端缩小 */
+  .art-video-player .art-control {
+    min-width: 32px;
+    height: 32px;
+    padding: 0 4px;
+    border-radius: 6px;
+  }
+
+  .art-video-player .art-control .art-icon {
+    font-size: 18px;
+  }
+
+  /* 时间显示 - 移动端缩小 */
+  .art-video-player .art-control-time {
+    font-size: 11px;
+    padding: 0 4px;
+    white-space: nowrap;
+  }
+
+  /* 隐藏部分非必要按钮，确保核心控制可见 */
+  .art-video-player .art-controls-right .art-control:nth-child(1),
+  .art-video-player .art-controls-right .art-control:nth-child(2) {
+    display: flex;
+  }
+
+  /* 设置按钮始终显示 */
+  .art-video-player .art-control[title="设置"],
+  .art-video-player .art-control[data-index="setting"] {
+    display: flex;
+  }
+}
+
+/* 超小屏幕优化 */
+@media (max-width: 380px) {
+  .art-video-player .art-bottom {
+    padding: 10px 4px 6px;
+  }
+
+  .art-video-player .art-control {
+    min-width: 28px;
+    height: 28px;
+    padding: 0 2px;
+  }
+
+  .art-video-player .art-control .art-icon {
+    font-size: 16px;
+  }
+
+  .art-video-player .art-control-time {
+    font-size: 10px;
+    padding: 0 2px;
+  }
+}
+
+/* 全屏模式下的控制栏 - 默认隐藏进度条，显示控制栏时显示 */
+.art-video-player.art-fullscreen .art-bottom {
+  padding: 24px 16px 16px;
+}
+
+/* 全屏时默认隐藏进度条 */
+.art-video-player.art-fullscreen .art-progress {
+  opacity: 0 !important;
+  transition: opacity 0.3s ease !important;
+  pointer-events: none !important;
+}
+
+/* 全屏时鼠标悬停或显示控制栏时显示进度条 */
+.art-video-player.art-fullscreen.art-hover .art-progress,
+.art-video-player.art-fullscreen.art-control-show .art-progress {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+.art-video-player.art-fullscreen .art-control {
+  min-width: 44px;
+  height: 44px;
+}
+
+.art-video-player.art-fullscreen .art-control .art-icon {
+  font-size: 24px;
+}
+
+/* ============================================
+   ArtPlayer 全局主题色覆盖 - 绿色
+   ============================================ */
+
+/* 覆盖ArtPlayer默认主题色 */
+.art-video-player {
+  --theme: #22c55e !important;
+}
+
+/* 进度条已播放部分 */
+.art-video-player .art-progress-played,
+.art-video-player .art-progress-played span {
+  background: linear-gradient(90deg, #22c55e, #4ade80) !important;
+}
+
+/* 音量条 */
+.art-video-player .art-volume-panel .art-volume-slider .art-volume-slider-inner,
+.art-video-player .art-volume-slider-inner {
+  background: linear-gradient(90deg, #22c55e, #4ade80) !important;
+}
+
+/* 高亮状态 */
+.art-video-player .art-progress-highlight span {
+  background-color: rgba(34, 197, 94, 0.5) !important;
+}
+
+/* 加载条 */
+.art-video-player .art-progress-loaded {
+  background-color: rgba(34, 197, 94, 0.3) !important;
+}
+
+/* 设置面板选中项 */
+.art-video-player .art-settings .art-setting-item-active,
+.art-video-player .art-setting-item-active {
+  color: #22c55e !important;
+}
+
+/* 提示信息 - 完全隐藏 */
+.art-video-player .art-notice {
+  display: none !important;
+}
+
+/* ============================================
+   ArtPlayer Range Slider 滑块样式优化
+   移动端滑块触摸优化
+   ============================================ */
+
+/* 滑块容器优化 */
+.art-setting-item-right-input {
+  /* 防止触摸时页面滚动 */
+  touch-action: manipulation !important;
+  /* 增加触摸区域 */
+  padding: 12px 0 !important;
+}
+
+/* 滑块输入框优化 */
+.art-setting-item-right-input input[type="range"] {
+  /* 重置默认样式 */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  /* 基础样式 */
+  width: 100%;
+  height: 6px;
+  background: transparent;
+  outline: none;
+  cursor: pointer;
+
+  /* 防止触摸时页面滚动 */
+  touch-action: manipulation !important;
+}
+
+/* 滑块轨道样式 - WebKit (Chrome, Safari, Edge) */
+.art-setting-item-right-input input[type="range"]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+/* 滑块轨道样式 - Firefox */
+.art-setting-item-right-input input[type="range"]::-moz-range-track {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+/* 滑块拖动按钮 - WebKit */
+.art-setting-item-right-input input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  background: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition: transform 0.15s ease;
+}
+
+/* 滑块拖动按钮 - Firefox */
+.art-setting-item-right-input input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  background: #fff;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition: transform 0.15s ease;
+}
+
+/* 移动端触摸优化 */
+@media (max-width: 768px) {
+  /* 增大滑块容器的触摸区域 */
+  .art-setting-item-right-input {
+    padding: 16px 0 !important;
+    min-height: 48px !important;
+  }
+
+  /* 增大滑块拖动按钮的尺寸 - 符合 44x44px 最小触摸目标 */
+  .art-setting-item-right-input input[type="range"]::-webkit-slider-thumb {
+    width: 24px;
+    height: 24px;
+  }
+
+  .art-setting-item-right-input input[type="range"]::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+  }
+
+  /* 增大轨道高度，更容易点击 */
+  .art-setting-item-right-input input[type="range"] {
+    height: 8px;
+  }
+
+  .art-setting-item-right-input input[type="range"]::-webkit-slider-runnable-track {
+    height: 8px;
+  }
+
+  .art-setting-item-right-input input[type="range"]::-moz-range-track {
+    height: 8px;
+  }
+}
+
+/* 激活状态 - 提供视觉反馈 */
+.art-setting-item-right-input input[type="range"]:active::-webkit-slider-thumb {
+  transform: scale(1.2);
+}
+
+.art-setting-item-right-input input[type="range"]:active::-moz-range-thumb {
+  transform: scale(1.2);
+}
+
+/* 焦点状态 */
+.art-setting-item-right-input input[type="range"]:focus {
+  outline: none;
+}
+
+.art-setting-item-right-input input[type="range"]:focus::-webkit-slider-thumb {
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2);
+}
+
+.art-setting-item-right-input input[type="range"]:focus::-moz-range-thumb {
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2);
+}
