@@ -37,6 +37,9 @@ interface SpiderSite extends VideoApi {
   spiderKey: string
   spiderType: 'script' | 'jar'
   scriptUrl?: string
+  searchable?: boolean
+  quickSearch?: boolean
+  filterable?: boolean
 }
 
 /**
@@ -69,7 +72,7 @@ export function isTVBoxFormat(data: unknown): boolean {
 /**
  * 将 TVBox 站点转换为 VideoApi
  */
-function convertTVBoxSiteToVideoApi(site: TVBoxSite, spiderJar?: string): VideoApi | SpiderSite | null {
+function convertTVBoxSiteToVideoApi(site: TVBoxSite): VideoApi | SpiderSite | null {
   const cleanName = site.name
     .replace(/[🍃🌍🥗🐉🎬📺]/g, '')
     .trim()
@@ -134,13 +137,11 @@ export function parseTVBoxConfig(data: unknown): VideoApi[] {
 
   const config = data as TVBoxConfig
   const sites = config.sites || []
-  const spiderJar = config.spider
-
   const videoApis: VideoApi[] = []
 
   for (const site of sites) {
     try {
-      const api = convertTVBoxSiteToVideoApi(site, spiderJar)
+      const api = convertTVBoxSiteToVideoApi(site)
       if (api) {
         videoApis.push(api)
       }
@@ -263,4 +264,4 @@ export function getTVBoxSpiderConfig(data: unknown): { key: string; scriptUrl: s
   return spiders
 }
 
-export { SpiderSite }
+export type { SpiderSite }

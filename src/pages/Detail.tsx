@@ -154,10 +154,11 @@ export default function Detail() {
     console.log('[Detail] selectedLineIndex:', selectedLineIndex)
     
     // 优先使用后端返回的 episodes_names 和 episodes
-    if (detail?.videoInfo?.episodes_names && detail?.videoInfo?.episodes) {
+    if (detail?.videoInfo?.episodes_names && detail?.videoInfo?.episodes && detail.videoInfo.episodes.length > 0) {
+      const episodes = detail.videoInfo.episodes
       const result = detail.videoInfo.episodes_names.map((name, index) => ({
         name,
-        url: detail.videoInfo.episodes[index] || ''
+        url: episodes[index] || ''
       }))
       console.log('[Detail] 使用 episodes_names 和 episodes，结果:', result)
       return result

@@ -254,7 +254,7 @@ class ApiService {
     }
   }
 
-  private parseVideoDetail(data: { list: VideoItem[] }, api: VideoApi, detailUrl: string): DetailResponse {
+  private parseVideoDetail(data: { list: VideoItem[] }, _api: VideoApi, detailUrl: string): DetailResponse {
     console.log('[apiService] parseVideoDetail 原始数据:', data)
     const videoDetail = data.list[0]
     let episodes: string[] = []

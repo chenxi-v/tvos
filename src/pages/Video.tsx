@@ -113,9 +113,7 @@ export default function Video() {
   } | null
   const episodeUrlFromState = state?.episodeUrl
   const flagFromState = state?.flag
-  const vodPicFromState = state?.vod_pic
   const vodNameFromState = state?.vod_name
-  const vodRemarksFromState = state?.vod_remarks
 
   console.log('[Video] location.state:', state)
   console.log('[Video] episodeUrlFromState:', episodeUrlFromState)
@@ -281,8 +279,6 @@ export default function Video() {
   // 获取显示信息
   const getTitle = () => vodNameFromState || detail?.videoInfo?.title || '未知视频'
   const sourceName = detail?.videoInfo?.source_name || '未知来源'
-  const getCover = () => vodPicFromState || detail?.videoInfo?.cover || ''
-  const getRemarks = () => vodRemarksFromState || detail?.videoInfo?.remarks || ''
 
   // 动态更新页面标题
   const pageTitle = useMemo(() => {
@@ -352,15 +348,16 @@ export default function Video() {
 
     const nextEpisode = () => {
       if (!playbackRef.current.isAutoPlayEnabled) return
+      if (!detail?.videoInfo) return
 
-      const total = detail.videoInfo?.episodes_names?.length || 0
+      const total = detail.videoInfo.episodes_names?.length || 0
       if (selectedEpisode < total - 1) {
         const nextIndex = selectedEpisode + 1
         setSelectedEpisode(nextIndex)
         navigate(`/video/${sourceCode}/${vodId}/${nextIndex}`, {
           replace: true,
         })
-        toast.info(`即将播放下一集: ${detail.videoInfo?.episodes_names?.[nextIndex]}`)
+        toast.info(`即将播放下一集: ${detail.videoInfo.episodes_names?.[nextIndex]}`)
       }
     }
 
@@ -508,7 +505,7 @@ export default function Video() {
     const api = videoAPIs.find(api => api.id === sourceCode)
     
     // 优先使用从 Detail.tsx 传递的 episodeUrl 和 flag
-    const episodeUrl = episodeUrlFromState || detail.episodes[selectedEpisode]
+    const episodeUrl = episodeUrlFromState || detail?.episodes?.[selectedEpisode]
     const flag = flagFromState || 'default'
     
     // 判断是否为 Spider API（与 apiService.isSpiderApi 逻辑一致）
@@ -528,6 +525,11 @@ export default function Video() {
     // 如果是 Spider API，检查 episodeUrl 是否包含播放链接
     // 如果 episodeUrl 包含 '$'，说明是 tuit.py 格式（视频名称$播放链接），直接使用第二部分
     // 否则调用 getPlayUrl 解析
+    if (!episodeUrl) {
+      console.error('[Video] episodeUrl 为空')
+      return
+    }
+    
     if (isSpiderApi) {
       if (episodeUrl.includes('$')) {
         // tuit.py 格式：视频名称$播放链接

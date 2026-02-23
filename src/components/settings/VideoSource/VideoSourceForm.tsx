@@ -145,7 +145,6 @@ function VideoSourceFormItem<T extends FieldValues>({
 // 视频源表单
 export default function VideoSourceForm({ sourceInfo }: { sourceInfo: VideoApi }) {
   const { removeVideoAPI, addAndUpdateVideoAPI, videoAPIs } = useApiStore()
-  const [loading, setLoading] = useState(false)
   const formSchema = z.object({
     id: z.string().min(1, '视频源ID不能为空').default(uuidv4()),
     name: z.string().min(1, '视频源名称不能为空').default('视频源1'),
