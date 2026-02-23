@@ -1,0 +1,7 @@
+{
+  "$schema": "https://schema.zeabur.app/schema.json",
+  "build": {
+    "command": "pnpm install && pnpm build",
+    "output_dir": "dist"
+  }
+}
