@@ -9,8 +9,8 @@ import { getProxyUrl } from '@/config/api.config'
 
 interface XmlCategorySectionProps {
   category: {
-    type_id: number
-    type_pid: number
+    type_id: number | string
+    type_pid: number | string
     type_name: string
   }
   api: VideoApi
