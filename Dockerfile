@@ -98,7 +98,7 @@ RUN echo "[supervisord]" > /etc/supervisord.conf && \
   echo "stderr_logfile_maxbytes=0" >> /etc/supervisord.conf
 
 # 暴露端口
-EXPOSE 80
+EXPOSE 3000
 
 # 健康检查
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
